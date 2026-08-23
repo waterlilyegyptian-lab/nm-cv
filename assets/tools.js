@@ -104,85 +104,200 @@
   /* ------------------------------------------------------------------ *
    * Exam planner
    * ------------------------------------------------------------------ */
-  var EXAMS = {
-    ielts: {
-      label: 'IELTS',
-      steps: ['4.5', '5.0', '5.5', '6.0', '6.5', '7.0', '7.5', '8.0'],
-      hoursPerStep: 90,
-      focusEn: ['Writing Task 2 — 35% of your study time; it is the paper that moves slowest.',
-                'Speaking, recorded and reviewed weekly — 25%.',
-                'Reading under strict time — 25%. Unfinished papers, not wrong answers, cost most candidates the band.',
-                'Listening — 15%, with note-taking practised as a skill of its own.'],
-      focusTr: ['Writing Task 2 — çalışma sürenizin %35\'i; en yavaş hareket eden bölüm budur.',
-                'Speaking — haftalık kayıt ve gözden geçirme, %25.',
-                'Reading — kesin süreyle %25. Adayların çoğu yanlış cevap yüzünden değil, bitiremediği sınav yüzünden puan kaybeder.',
-                'Listening — %15; not tutma başlı başına bir beceri olarak çalışılır.']
+  /* Focus profiles are shared by exam family so the advice stays specific
+     without repeating itself twenty-five times. */
+  var FOCUS = {
+    gradVerbal: {
+      en: ['Vocabulary in families and in context — 35%. Passive recognition is not enough; these tests punish the almost-right word.',
+           'Reading comprehension on dense argumentative passages — 30%. Speed on unfamiliar registers is the usual bottleneck.',
+           'Argument structure — premise, assumption, conclusion — taught as analysis rather than as answer-elimination tricks — 25%.',
+           'Timed full sections with an error log grouped by question type — 10%.'],
+      tr: ['Aileler hâlinde ve bağlam içinde kelime — %35. Pasif tanıma yetmez; bu sınavlar “neredeyse doğru” kelimeyi cezalandırır.',
+           'Yoğun tartışma metinlerinde okuduğunu anlama — %30. Alışılmadık dilde hız, olağan darboğazdır.',
+           'Argüman yapısı — öncül, varsayım, sonuç — şık eleme taktiği olarak değil çözümleme olarak — %25.',
+           'Soru tipine göre gruplanmış hata kaydıyla süreli tam bölümler — %10.']
     },
-    toefl: {
-      label: 'TOEFL iBT',
-      steps: ['45', '55', '65', '75', '85', '95', '105'],
-      hoursPerStep: 85,
-      focusEn: ['Integrated tasks — 40%. This is where the marks leak on TOEFL.',
-                'Academic listening with structured note-taking — 25%.',
-                'Reading speed and paraphrase recognition — 20%.',
-                'Independent writing and timed typing — 15%.'],
-      focusTr: ['Bütünleşik görevler — %40. TOEFL\'da puan asıl burada kaçar.',
-                'Yapılandırılmış not tutmayla akademik dinleme — %25.',
-                'Okuma hızı ve başka sözcüklerle anlatımı tanıma — %20.',
-                'Bağımsız yazma ve süreli klavye pratiği — %15.']
+    sciVerbal: {
+      en: ['Reading comprehension on humanities and social science passages — 45%. The science is not the problem; the register is.',
+           'Reasoning beyond the text: inference, tone and author position — 30%.',
+           'Pacing drills against the real section clock — 15%.',
+           'Written argument where the test includes one — 10%.'],
+      tr: ['Beşerî ve sosyal bilim metinlerinde okuduğunu anlama — %45. Sorun fen değil, dilin kendisidir.',
+           'Metnin ötesinde muhakeme: çıkarım, ton ve yazarın konumu — %30.',
+           'Gerçek bölüm süresine karşı tempo çalışması — %15.',
+           'Sınavda varsa yazılı argüman — %10.']
     },
-    yds: {
-      label: 'YDS / YÖKDİL',
-      steps: ['30', '40', '50', '60', '70', '80', '90'],
-      hoursPerStep: 70,
-      focusEn: ['Academic vocabulary in families — 35%. This exam is won on vocabulary.',
-                'Advanced grammar and sentence completion — 30%.',
-                'Paragraph coherence and the closest-meaning items — 20%.',
-                'Timed past papers with an error log by question type — 15%.'],
-      focusTr: ['Aileler hâlinde akademik kelime — %35. Bu sınav kelimeyle kazanılır.',
-                'İleri dil bilgisi ve cümle tamamlama — %30.',
-                'Paragraf bütünlüğü ve en yakın anlam soruları — %20.',
-                'Soru tipine göre hata kaydıyla süreli çıkmış sınavlar — %15.']
+    ugAdmissions: {
+      en: ['Evidence-based reading with the answer located in the text every time — 35%.',
+           'Grammar and rhetoric of the writing module — 30%.',
+           'Vocabulary in context, including the historical and founding documents — 20%.',
+           'Timed sections from the first week; pacing is the skill being tested — 15%.'],
+      tr: ['Cevabın her seferinde metinde bulunduğu kanıta dayalı okuma — %35.',
+           'Yazma modülünün dil bilgisi ve retoriği — %30.',
+           'Tarihî ve kurucu belgeler dahil, bağlam içinde kelime — %20.',
+           'İlk haftadan süreli bölümler; ölçülen beceri tempodur — %15.']
     },
-    prof: {
-      label: 'METU / Bilkent proficiency',
-      steps: ['well below the pass', 'just below the pass', 'borderline', 'a safe pass', 'a comfortable pass'],
-      hoursPerStep: 80,
-      focusEn: ['Timed academic reading, long texts — 30%. Reading speed is the usual bottleneck.',
-                'Essay writing to the department rubric — 30%.',
-                'Summary and paraphrase tasks — 25%.',
-                'Listening to lecture-length input — 15%.'],
-      focusTr: ['Süreli akademik okuma, uzun metinler — %30. Darboğaz genellikle okuma hızıdır.',
-                'Bölüm ölçütüne göre deneme yazma — %30.',
-                'Özetleme ve başka sözcüklerle anlatma görevleri — %25.',
-                'Ders uzunluğunda dinleme — %15.']
+    fourSkill: {
+      en: ['Writing — 35%. It is the paper that moves slowest and the one worth the most attention.',
+           'Speaking, recorded and reviewed weekly against the official descriptors — 25%.',
+           'Reading under strict time — 25%. Unfinished papers, not wrong answers, cost most candidates the score.',
+           'Listening — 15%, with note-taking practised as a skill of its own.'],
+      tr: ['Yazma — %35. En yavaş hareket eden ve en çok ilgiyi hak eden bölüm budur.',
+           'Konuşma; haftalık kayıt ve resmî ölçütlere göre gözden geçirme — %25.',
+           'Kesin süreyle okuma — %25. Adayların çoğu yanlış cevaptan değil, bitiremediği sınavdan puan kaybeder.',
+           'Dinleme — %15; not tutma başlı başına bir beceri olarak çalışılır.']
     },
-    gre: {
-      label: 'GRE Verbal Reasoning',
-      steps: ['145', '150', '155', '160', '165', '170'],
-      hoursPerStep: 100,
-      focusEn: ['Vocabulary in families and in context — 40%. Text completion and sentence equivalence are won here.',
-                'Reading comprehension on dense argumentative passages — 30%.',
-                'Analytical writing, one task drafted and rewritten each week — 20%.',
-                'Timed full sections with an error log by question type — 10%.'],
-      focusTr: ['Aileler hâlinde ve bağlam içinde kelime — %40. Text completion ve sentence equivalence burada kazanılır.',
-                'Yoğun tartışma metinlerinde okuduğunu anlama — %30.',
-                'Analitik yazma; her hafta bir görev yazılıp yeniden yazılır — %20.',
-                'Soru tipine göre hata kaydıyla süreli tam bölümler — %10.']
+    integrated: {
+      en: ['Integrated tasks — 40%. Read a passage, hear a lecture that contradicts it, and write or speak the relationship under time.',
+           'Academic listening with structured note-taking — 25%.',
+           'Reading speed and paraphrase recognition — 20%.',
+           'Independent writing and timed typing — 15%.'],
+      tr: ['Bütünleşik görevler — %40. Bir metni okuyun, onu çürüten bir dersi dinleyin ve ilişkiyi süre altında yazın ya da söyleyin.',
+           'Yapılandırılmış not tutmayla akademik dinleme — %25.',
+           'Okuma hızı ve başka sözcüklerle anlatımı tanıma — %20.',
+           'Bağımsız yazma ve süreli klavye pratiği — %15.']
     },
-    sat: {
-      label: 'SAT Reading & Writing',
-      steps: ['400', '440', '480', '520', '560', '600', '640', '680', '720', '760'],
-      hoursPerStep: 30,
-      focusEn: ['Evidence-based reading with the answer located in the text every time — 35%.',
-                'Grammar and rhetoric of the writing module — 30%.',
-                'Vocabulary in context, including the historical documents — 20%.',
-                'Timed sections from the first week; pacing is the skill being tested — 15%.'],
-      focusTr: ['Cevabın her seferinde metinde bulunduğu kanıta dayalı okuma — %35.',
-                'Yazma modülünün dil bilgisi ve retoriği — %30.',
-                'Tarihî belgeler dahil, bağlam içinde kelime — %20.',
-                'İlk haftadan süreli bölümler; ölçülen beceri tempodur — %15.']
+    machineScored: {
+      en: ['Fluency and pronunciation consistency — 35%. A machine rewards an even delivery in a way no human examiner would.',
+           'Keyword coverage in spoken and written answers — 25%.',
+           'Read-aloud and repeat-sentence drills, timed — 25%.',
+           'Summarise-written-text practice against the word limit — 15%.'],
+      tr: ['Akıcılık ve telaffuz tutarlılığı — %35. Makine, hiçbir insan değerlendiricinin ödüllendirmeyeceği biçimde dengeli anlatımı ödüllendirir.',
+           'Sözlü ve yazılı cevaplarda anahtar kelime kapsamı — %25.',
+           'Sesli okuma ve cümle tekrarı alıştırmaları, süreli — %25.',
+           'Kelime sınırına karşı metin özetleme pratiği — %15.']
+    },
+    trExam: {
+      en: ['Academic vocabulary in families — 35%. These exams are won on vocabulary.',
+           'Advanced grammar and sentence completion — 30%.',
+           'Paragraph coherence and closest-meaning items — 20%.',
+           'Timed past papers with an error log by question type — 15%.'],
+      tr: ['Aileler hâlinde akademik kelime — %35. Bu sınavlar kelimeyle kazanılır.',
+           'İleri dil bilgisi ve cümle tamamlama — %30.',
+           'Paragraf bütünlüğü ve en yakın anlam soruları — %20.',
+           'Soru tipine göre hata kaydıyla süreli çıkmış sınavlar — %15.']
+    },
+    universityProf: {
+      en: ['Timed academic reading, long texts — 30%. Reading speed is the usual bottleneck.',
+           'Essay writing to the department rubric — 30%.',
+           'Summary and paraphrase tasks — 25%.',
+           'Listening to lecture-length input — 15%.'],
+      tr: ['Süreli akademik okuma, uzun metinler — %30. Darboğaz genellikle okuma hızıdır.',
+           'Bölüm ölçütüne göre deneme yazma — %30.',
+           'Özetleme ve başka sözcüklerle anlatma görevleri — %25.',
+           'Ders uzunluğunda dinleme — %15.']
+    },
+    workplace: {
+      en: ['The business registers the test repeats — meetings, correspondence, announcements — 35%.',
+           'Listening for detail at natural speed — 30%.',
+           'Reading speed on short functional texts — 25%.',
+           'Timed full papers — 10%.'],
+      tr: ['Sınavın tekrar ettiği iş dilleri — toplantılar, yazışmalar, duyurular — %35.',
+           'Doğal hızda ayrıntı için dinleme — %30.',
+           'Kısa işlevsel metinlerde okuma hızı — %25.',
+           'Süreli tam sınavlar — %10.']
+    },
+    medical: {
+      en: ['Profession-specific writing — the referral letter — 35%. It is where most candidates lose the grade.',
+           'Role-played consultations against the clinical communication criteria — 30%.',
+           'Listening to consultations and case presentations — 20%.',
+           'Reading medical texts at speed — 15%.'],
+      tr: ['Mesleğe özgü yazma — sevk mektubu — %35. Çoğu aday notu burada kaybeder.',
+           'Klinik iletişim ölçütlerine göre rol yapılan hasta görüşmeleri — %30.',
+           'Hasta görüşmelerini ve vaka sunumlarını dinleme — %20.',
+           'Tıbbi metinleri hızla okuma — %15.']
+    },
+    aviation: {
+      en: ['Plain English under non-routine conditions — 40%. Standard phraseology is not what is being rated.',
+           'Listening to accented radio transmissions with interference — 25%.',
+           'The fluency, comprehension and interaction descriptors of the rating scale — 25%.',
+           'Incident description and clarification strategies — 10%.'],
+      tr: ['Rutin dışı durumlarda sade İngilizce — %40. Değerlendirilen şey standart terminoloji değildir.',
+           'Aksanlı ve parazitli telsiz iletişimlerini dinleme — %25.',
+           'Derecelendirme ölçeğinin akıcılık, anlama ve etkileşim ölçütleri — %25.',
+           'Olay anlatımı ve netleştirme stratejileri — %10.']
+    },
+    youngLearners: {
+      en: ['Speaking practice with the picture and interview task types — 30%.',
+           'Vocabulary from the official wordlist for that level — 30%.',
+           'Listening with the answer sheet used from the first lesson — 25%.',
+           'Short writing tasks to the mark scheme — 15%.'],
+      tr: ['Resim ve mülakat görev tipleriyle konuşma pratiği — %30.',
+           'O seviyenin resmî kelime listesinden kelime — %30.',
+           'İlk dersten itibaren cevap kâğıdı kullanılarak dinleme — %25.',
+           'Puanlama ölçütüne göre kısa yazma görevleri — %15.']
+    },
+    schoolTerm: {
+      en: ['The unit the school is on, taught properly rather than revised — 40%.',
+           'Exam technique for how that unit will be tested — 30%.',
+           'Extended writing or speaking so the grammar has somewhere to go — 20%.',
+           'Vocabulary kept in a notebook with the student’s own sentences — 10%.'],
+      tr: ['Okulun işlediği ünite — tekrar edilerek değil, düzgünce öğretilerek — %40.',
+           'O ünitenin nasıl sınanacağına dair sınav tekniği — %30.',
+           'Dil bilgisinin gidecek bir yeri olsun diye uzun yazma ya da konuşma — %20.',
+           'Öğrencinin kendi cümleleriyle tuttuğu kelime defteri — %10.']
     }
+  };
+
+  function ex(label, group, steps, hoursPerStep, focus, unitEn, unitTr, labelTr) {
+    return { label: label, labelTr: labelTr || label, group: group, steps: steps,
+             hoursPerStep: hoursPerStep, focusEn: FOCUS[focus].en, focusTr: FOCUS[focus].tr,
+             unitEn: unitEn || '', unitTr: unitTr || '' };
+  }
+  function examLabel(e) { return isTR() ? e.labelTr : e.label; }
+
+  var GROUPS = {
+    grad:   { en: 'Graduate & professional admissions', tr: 'Lisansüstü ve mesleki giriş' },
+    ug:     { en: 'Undergraduate admissions',           tr: 'Lisans giriş' },
+    prof:   { en: 'English proficiency',                tr: 'İngilizce yeterlilik' },
+    camb:   { en: 'Cambridge English',                  tr: 'Cambridge English' },
+    tr:     { en: 'Türkiye',                            tr: 'Türkiye' },
+    spec:   { en: 'Professional & specialist',          tr: 'Mesleki ve uzmanlık' },
+    school: { en: 'School',                             tr: 'Okul' }
+  };
+
+  var EXAMS = {
+    /* graduate & professional admissions */
+    gre:      ex('GRE Verbal Reasoning',      'grad', ['145','150','155','160','165','170'], 100, 'gradVerbal', 'scaled score', 'ölçekli puan'),
+    grewrite: ex('GRE Analytical Writing',    'grad', ['2.5','3.0','3.5','4.0','4.5','5.0','5.5','6.0'], 55, 'gradVerbal', 'score', 'puan', 'GRE Analitik Yazma'),
+    gmat:     ex('GMAT Focus — Verbal',       'grad', ['70','74','78','82','86','90'], 90, 'gradVerbal', 'section score', 'bölüm puanı'),
+    lsat:     ex('LSAT',                      'grad', ['140','145','150','155','160','165','170','175'], 85, 'gradVerbal', 'scaled score', 'ölçekli puan'),
+    mcat:     ex('MCAT — CARS section',       'grad', ['118','120','122','124','126','128','130','132'], 80, 'sciVerbal', 'section score', 'bölüm puanı', 'MCAT — CARS bölümü'),
+    dat:      ex('DAT — Reading Comprehension','grad', ['15','18','21','24','27','30'], 60, 'sciVerbal', 'scaled score', 'ölçekli puan', 'DAT — Okuduğunu Anlama'),
+    oat:      ex('OAT — Reading Comprehension','grad', ['300','320','340','360','380','400'], 60, 'sciVerbal', 'scaled score', 'ölçekli puan', 'OAT — Okuduğunu Anlama'),
+    usmle:    ex('USMLE — verbal readiness',  'grad', ['well below','just below','borderline','comfortable','strong'], 70, 'sciVerbal', '', '', 'USMLE — sözel hazırlık'),
+    cat:      ex('CAT — VARC',                'grad', ['60','70','80','85','90','95','99'], 70, 'gradVerbal', 'percentile', 'yüzdelik'),
+
+    /* undergraduate admissions */
+    sat:      ex('SAT — Reading & Writing',   'ug', ['400','440','480','520','560','600','640','680','720','760'], 30, 'ugAdmissions', 'section score', 'bölüm puanı', 'SAT — Okuma ve Yazma'),
+    act:      ex('ACT — English & Reading',   'ug', ['16','18','20','22','24','26','28','30','32','34','36'], 35, 'ugAdmissions', 'scaled score', 'ölçekli puan', 'ACT — İngilizce ve Okuma'),
+    ap:       ex('AP English Lang. / Lit.',   'ug', ['1','2','3','4','5'], 70, 'ugAdmissions', 'grade', 'not'),
+
+    /* english proficiency */
+    toefl:    ex('TOEFL iBT',                 'prof', ['45','55','65','75','85','95','105','115'], 85, 'integrated', 'total score', 'toplam puan'),
+    ielts:    ex('IELTS Academic / General',  'prof', ['4.5','5.0','5.5','6.0','6.5','7.0','7.5','8.0','8.5'], 90, 'fourSkill', 'band', 'bant', 'IELTS Academic / General'),
+    pte:      ex('PTE Academic',              'prof', ['30','40','50','60','70','80','90'], 80, 'machineScored', 'overall score', 'genel puan'),
+    itep:     ex('iTEP',                      'prof', ['2.5','3.0','3.5','4.0','4.5','5.0','5.5','6.0'], 70, 'fourSkill', 'level', 'seviye'),
+    linguaskill: ex('Linguaskill / BULATS',   'prof', ['100','110','120','130','140','150','160','170','180'], 70, 'fourSkill', 'Cambridge scale', 'Cambridge ölçeği'),
+
+    /* cambridge english */
+    cambridge: ex('Cambridge FCE / CAE / CPE','camb', ['150','160','170','180','190','200','210','220'], 90, 'fourSkill', 'Cambridge scale', 'Cambridge ölçeği'),
+    yle:       ex('Cambridge YLE / KET / PET','camb', ['110','120','130','140','150','160','170'], 60, 'youngLearners', 'Cambridge scale', 'Cambridge ölçeği'),
+    bec:       ex('Cambridge BEC / ILEC / ICFE','camb', ['150','160','170','180','190','200','210'], 80, 'workplace', 'Cambridge scale', 'Cambridge ölçeği'),
+
+    /* türkiye */
+    yds:      ex('YDS / YÖKDİL / ÜDS',        'tr', ['30','40','50','60','70','80','90'], 70, 'trExam', 'score', 'puan'),
+    ydt:      ex('YKS — YDT',                 'tr', ['20','30','40','50','60','70','80'], 60, 'trExam', 'net', 'net'),
+    profexam: ex('METU / Bilkent proficiency','tr', ['well below the pass','just below the pass','borderline','a safe pass','a comfortable pass'], 80, 'universityProf', '', '', 'ODTÜ / Bilkent yeterlilik'),
+
+    /* professional & specialist */
+    toeic:    ex('TOEIC Listening & Reading', 'spec', ['400','500','600','700','800','900','990'], 60, 'workplace', 'total score', 'toplam puan', 'TOEIC Dinleme ve Okuma'),
+    oet:      ex('OET',                       'spec', ['200','250','300','350','400','450'], 70, 'medical', 'sub-test score', 'alt test puanı'),
+    icao:     ex('ICAO Aviation English',     'spec', ['3','4','5','6'], 110, 'aviation', 'operational level', 'operasyonel seviye', 'ICAO Havacılık İngilizcesi'),
+    torfl:    ex('TORFL (Russian)',           'spec', ['A1','A2','B1','B2','C1','C2'], 180, 'fourSkill', 'level', 'seviye', 'TORFL (Rusça)'),
+
+    /* school */
+    school:   ex('School English — term grade','school', ['40','50','60','70','80','90','100'], 25, 'schoolTerm', 'out of 100', '100 üzerinden', 'Okul İngilizcesi — dönem notu')
   };
 
   function initPlanner(root) {
@@ -192,8 +307,30 @@
     var hoursEl = root.querySelector('[data-role="hours"]');
     var out = root.querySelector('[data-role="out"]');
 
+    function fillExams() {
+      var order = ['grad', 'ug', 'prof', 'camb', 'tr', 'spec', 'school'];
+      var keep = examEl.value;
+      examEl.innerHTML = '';
+      order.forEach(function (g) {
+        var og = document.createElement('optgroup');
+        og.label = isTR() ? GROUPS[g].tr : GROUPS[g].en;
+        Object.keys(EXAMS).forEach(function (k) {
+          if (EXAMS[k].group !== g) return;
+          var o = document.createElement('option');
+          o.value = k; o.textContent = examLabel(EXAMS[k]);
+          og.appendChild(o);
+        });
+        if (og.children.length) examEl.appendChild(og);
+      });
+      examEl.value = (keep && EXAMS[keep]) ? keep : 'toefl';
+    }
+
     function fillSteps() {
       var ex = EXAMS[examEl.value];
+      var unit = isTR() ? ex.unitTr : ex.unitEn;
+      root.querySelectorAll('[data-role="unit"]').forEach(function (u) {
+        u.textContent = unit ? ' (' + unit + ')' : '';
+      });
       [fromEl, toEl].forEach(function (sel, si) {
         sel.innerHTML = '';
         ex.steps.forEach(function (s, i) {
@@ -239,7 +376,7 @@
           '<div class="plan-big"><strong>~' + lessons + '</strong><span>' + t('lessons with me', 'benimle ders') + '</span></div>' +
         '</div>' +
         '<p class="plan-line">' + (isTR()
-            ? ex.label + ' — <strong>' + ex.steps[from] + '</strong> seviyesinden <strong>' + ex.steps[to] +
+            ? examLabel(ex) + ' — <strong>' + ex.steps[from] + '</strong> seviyesinden <strong>' + ex.steps[to] +
               '</strong> seviyesine, haftada <strong>' + hours + '</strong> saat çalışarak.'
             : 'Moving from <strong>' + ex.steps[from] + '</strong> to <strong>' + ex.steps[to] +
               '</strong> on ' + ex.label + ', at <strong>' + hours + '</strong> hours a week.') + '</p>' +
@@ -254,8 +391,8 @@
     [fromEl, toEl, hoursEl].forEach(function (el) {
       el.addEventListener('change', calc); el.addEventListener('input', calc);
     });
-    document.addEventListener('nm:langchange', calc);
-    fillSteps(); calc();
+    document.addEventListener('nm:langchange', function () { fillExams(); fillSteps(); calc(); });
+    fillExams(); fillSteps(); calc();
   }
 
   /* ------------------------------------------------------------------ *
@@ -311,9 +448,132 @@
     });
   }
 
+
+  /* ------------------------------------------------------------------ *
+   * Resource library — filters build themselves from the data
+   * ------------------------------------------------------------------ */
+  var FORMAT = {
+    sheet:   { en: 'Printable sheet', tr: 'Yazdırılabilir sayfa' },
+    pdf:     { en: 'PDF',             tr: 'PDF' },
+    podcast: { en: 'Podcast',         tr: 'Podcast' },
+    video:   { en: 'Video',           tr: 'Video' },
+    film:    { en: 'Film & TV',       tr: 'Film ve dizi' },
+    site:    { en: 'Website',         tr: 'Web sitesi' },
+    test:    { en: 'Practice test',   tr: 'Deneme sınavı' },
+    book:    { en: 'Book',            tr: 'Kitap' }
+  };
+  var SKILL = {
+    listening:  { en: 'Listening',      tr: 'Dinleme' },
+    speaking:   { en: 'Speaking',       tr: 'Konuşma' },
+    reading:    { en: 'Reading',        tr: 'Okuma' },
+    writing:    { en: 'Writing',        tr: 'Yazma' },
+    vocabulary: { en: 'Vocabulary',     tr: 'Kelime' },
+    grammar:    { en: 'Grammar',        tr: 'Dil bilgisi' },
+    technique:  { en: 'Exam technique', tr: 'Sınav tekniği' }
+  };
+
+  function initLibrary(root) {
+    var data = window.NM_LIBRARY || [];
+    var barEl = root.querySelector('[data-role="filters"]');
+    var gridEl = root.querySelector('[data-role="grid"]');
+    var countEl = root.querySelector('[data-role="count"]');
+    var picked = { format: [], skills: [], levels: [] };
+
+    function values(field) {
+      var seen = [];
+      data.forEach(function (d) {
+        var v = d[field];
+        (Array.isArray(v) ? v : [v]).forEach(function (x) { if (x && seen.indexOf(x) < 0) seen.push(x); });
+      });
+      return seen;
+    }
+    function labelFor(field, key) {
+      if (field === 'format') return FORMAT[key] ? (isTR() ? FORMAT[key].tr : FORMAT[key].en) : key;
+      if (field === 'skills') return SKILL[key] ? (isTR() ? SKILL[key].tr : SKILL[key].en) : key;
+      return key;
+    }
+
+    function matches(d) {
+      function ok(field, sel) {
+        if (!sel.length) return true;
+        var v = d[field]; v = Array.isArray(v) ? v : [v];
+        return sel.some(function (x) { return v.indexOf(x) >= 0; });
+      }
+      return ok('format', picked.format) && ok('skills', picked.skills) && ok('levels', picked.levels);
+    }
+
+    function renderGrid() {
+      var shown = data.filter(matches);
+      gridEl.innerHTML = '';
+      shown.forEach(function (d) {
+        var external = /^https?:/.test(d.href);
+        var a = document.createElement('a');
+        a.className = 'lib-card';
+        a.href = d.href;
+        if (external) { a.target = '_blank'; a.rel = 'noopener'; }
+        var tags = (d.skills || []).map(function (k) { return labelFor('skills', k); })
+          .concat(d.levels || []).concat(d.exams || []);
+        a.innerHTML =
+          '<span class="lib-format">' + labelFor('format', d.format) + '</span>' +
+          '<span class="lib-title">' + (isTR() ? d.title.tr : d.title.en) + '</span>' +
+          '<span class="lib-note">' + (isTR() ? d.note.tr : d.note.en) + '</span>' +
+          '<span class="lib-tags">' + tags.map(function (t) { return '<em>' + t + '</em>'; }).join('') + '</span>' +
+          '<span class="lib-go">' + (external ? '↗' : '↓') + '</span>';
+        gridEl.appendChild(a);
+      });
+      countEl.textContent = shown.length + ' / ' + data.length;
+      if (!shown.length) {
+        gridEl.innerHTML = '<p class="lib-empty">' +
+          t('Nothing matches that combination yet. Clear a filter, or tell me what is missing and I will write it.',
+            'Bu birleşimle eşleşen bir şey henüz yok. Bir filtreyi kaldırın ya da eksik olanı söyleyin, yazayım.') + '</p>';
+      }
+    }
+
+    function renderFilters() {
+      barEl.innerHTML = '';
+      [['format', t('Format', 'Biçim')],
+       ['skills', t('Skill', 'Beceri')],
+       ['levels', t('Level', 'Seviye')]].forEach(function (pair) {
+        var field = pair[0];
+        var row = document.createElement('div');
+        row.className = 'lib-facet';
+        row.innerHTML = '<span class="lib-facet-name">' + pair[1] + '</span>';
+        var wrap = document.createElement('div');
+        wrap.className = 'lib-chips';
+        values(field).forEach(function (v) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'chip-btn' + (picked[field].indexOf(v) >= 0 ? ' on' : '');
+          b.textContent = labelFor(field, v);
+          b.addEventListener('click', function () {
+            var i = picked[field].indexOf(v);
+            if (i >= 0) picked[field].splice(i, 1); else picked[field].push(v);
+            renderFilters(); renderGrid();
+          });
+          wrap.appendChild(b);
+        });
+        row.appendChild(wrap);
+        barEl.appendChild(row);
+      });
+      var clear = document.createElement('button');
+      clear.type = 'button';
+      clear.className = 'lib-clear';
+      clear.textContent = t('Clear all filters', 'Tüm filtreleri temizle');
+      clear.hidden = !(picked.format.length || picked.skills.length || picked.levels.length);
+      clear.addEventListener('click', function () {
+        picked = { format: [], skills: [], levels: [] }; renderFilters(); renderGrid();
+      });
+      barEl.appendChild(clear);
+    }
+
+    document.addEventListener('nm:langchange', function () { renderFilters(); renderGrid(); });
+    renderFilters(); renderGrid();
+  }
+
   /* ------------------------------------------------------------------ */
   document.querySelectorAll('[data-tool="level"]').forEach(initLevel);
   document.querySelectorAll('[data-tool="planner"]').forEach(initPlanner);
   document.querySelectorAll('[data-tool="contact"]').forEach(initContact);
+  document.querySelectorAll('[data-tool="library"]').forEach(initLibrary);
   initPrint();
 })();

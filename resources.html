@@ -104,25 +104,18 @@ var l=localStorage.getItem('nm-lang');if(l==='tr'){document.documentElement.setA
 <section class="sec alt" id="planner">
   <div class="wrap narrow">
     <div class="sec-head reveal"><span class="num"><span lang="en">Tool 02</span><span lang="tr">Araç 02</span></span><h2><span lang="en">Exam study planner</span><span lang="tr">Sınav çalışma planlayıcısı</span></h2></div>
-    <p class="sec-lede reveal" lang="en">Tell it where you are, where you need to be, and how many hours a week you can genuinely give. It returns a realistic number of weeks and where those hours should go. The arithmetic is the same one I use in a first meeting.</p>
-    <p class="sec-lede reveal" lang="tr">Nerede olduğunuzu, nerede olmanız gerektiğini ve haftada gerçekten kaç saat ayırabileceğinizi söyleyin. Gerçekçi bir hafta sayısı ve bu saatlerin nereye gitmesi gerektiğini verir. Hesap, ilk görüşmede kullandığımın aynısı.</p>
+    <p class="sec-lede reveal" lang="en">Twenty-eight examinations, from GRE and LSAT to YDS and a school term grade. Tell it where you are, where you need to be, and how many hours a week you can genuinely give. It returns a realistic number of weeks and where those hours should go — the same arithmetic I use in a first meeting.</p>
+    <p class="sec-lede reveal" lang="tr">GRE ve LSAT'ten YDS'ye ve okul dönem notuna kadar yirmi sekiz sınav. Nerede olduğunuzu, nerede olmanız gerektiğini ve haftada gerçekten kaç saat ayırabileceğinizi söyleyin. Gerçekçi bir hafta sayısı ve bu saatlerin nereye gitmesi gerektiğini verir — ilk görüşmede kullandığım hesabın aynısı.</p>
 
     <div class="tool reveal" data-tool="planner">
       <div class="planner-grid">
         <label><span lang="en">Exam</span><span lang="tr">Sınav</span>
-          <select data-role="exam">
-            <option value="toefl">TOEFL iBT</option>
-            <option value="gre">GRE Verbal Reasoning</option>
-            <option value="sat">SAT Reading &amp; Writing</option>
-            <option value="ielts">IELTS</option>
-            <option value="yds">YDS / YÖKDİL</option>
-            <option value="prof">METU / Bilkent proficiency</option>
-          </select>
+          <select data-role="exam"></select>
         </label>
-        <label><span lang="en">Where you are now</span><span lang="tr">Şu anki durumunuz</span>
+        <label><span lang="en">Where you are now</span><span lang="tr">Şu anki durumunuz</span><span data-role="unit"></span>
           <select data-role="from"></select>
         </label>
-        <label><span lang="en">Where you need to be</span><span lang="tr">Ulaşmanız gereken</span>
+        <label><span lang="en">Where you need to be</span><span lang="tr">Ulaşmanız gereken</span><span data-role="unit"></span>
           <select data-role="to"></select>
         </label>
         <label><span lang="en">Hours a week you can give</span><span lang="tr">Haftada ayırabileceğiniz saat</span>
@@ -134,10 +127,35 @@ var l=localStorage.getItem('nm-lang');if(l==='tr'){document.documentElement.setA
   </div>
 </section>
 
-<!-- ============ FREE RESOURCES ============ -->
+<!-- ============ LIBRARY ============ -->
 <section class="sec" id="library">
   <div class="wrap">
-    <div class="sec-head reveal"><span class="num"><span lang="en">Free library</span><span lang="tr">Ücretsiz kitaplık</span></span><h2><span lang="en">Material you can print tonight</span><span lang="tr">Bu akşam yazdırabileceğiniz materyal</span></h2></div>
+    <div class="sec-head reveal"><span class="num"><span lang="en">Library</span><span lang="tr">Kitaplık</span></span><h2><span lang="en">Everything, filtered three ways</span><span lang="tr">Her şey, üç ölçüte göre süzülmüş</span></h2></div>
+
+    <div class="how-filed reveal">
+      <h3><span lang="en">How this library is filed</span><span lang="tr">Bu kitaplık nasıl düzenlendi</span></h3>
+      <p lang="en">Every item carries three labels, and you can filter on all three at once. A resource is not filed by where it came from — it is filed by what a student can do with it.</p>
+      <p lang="tr">Her kaynak üç etiket taşır ve üçüne aynı anda göre süzebilirsiniz. Bir kaynak nereden geldiğine göre değil, bir öğrencinin onunla ne yapabileceğine göre sınıflanır.</p>
+      <dl class="filed-key">
+        <div><dt><span lang="en">Format</span><span lang="tr">Biçim</span></dt><dd><span lang="en">What it physically is — a printable sheet, a PDF, a podcast, a video, a film or series, a website, a practice test, a book. This is the label that tells you whether you need twenty minutes and headphones, or a printer.</span><span lang="tr">Fiziksel olarak ne olduğu — yazdırılabilir sayfa, PDF, podcast, video, film ya da dizi, web sitesi, deneme sınavı, kitap. Bu etiket, yirmi dakika ve kulaklık mı yoksa yazıcı mı gerektiğini söyler.</span></dd></div>
+        <div><dt><span lang="en">Skill</span><span lang="tr">Beceri</span></dt><dd><span lang="en">What it actually trains — listening, speaking, reading, writing, vocabulary, grammar or exam technique. One resource often carries two; it should never carry all seven, and if it does it probably trains none of them well.</span><span lang="tr">Gerçekte neyi çalıştırdığı — dinleme, konuşma, okuma, yazma, kelime, dil bilgisi ya da sınav tekniği. Bir kaynak çoğu zaman ikisini taşır; yedisini birden taşımamalıdır, taşıyorsa muhtemelen hiçbirini iyi çalıştırmıyordur.</span></dd></div>
+        <div><dt><span lang="en">Level</span><span lang="tr">Seviye</span></dt><dd><span lang="en">The CEFR levels it genuinely suits, A2 to C2. This is the label people get wrong most often: material two levels above you is not ambitious, it is wasted time.</span><span lang="tr">Gerçekten uyduğu Avrupa dil çerçevesi seviyeleri, A2'den C2'ye. En sık yanlış konan etiket budur: seviyenizin iki üstündeki materyal iddialı değil, boşa harcanmış zamandır.</span></dd></div>
+        <div><dt><span lang="en">Exam</span><span lang="tr">Sınav</span></dt><dd><span lang="en">An optional fourth tag, shown on the card. Left empty when a resource is simply good English rather than preparation for a particular paper.</span><span lang="tr">Kartta görünen isteğe bağlı dördüncü etiket. Bir kaynak belirli bir sınava hazırlık değil de sadece iyi İngilizceyse boş bırakılır.</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="tool lib reveal" data-tool="library">
+      <div class="lib-bar" data-role="filters"></div>
+      <p class="lib-count"><span lang="en">Showing</span><span lang="tr">Gösterilen</span> <strong data-role="count"></strong></p>
+      <div class="lib-grid" data-role="grid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FREE RESOURCES ============ -->
+<section class="sec alt" id="sheets">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num"><span lang="en">Printable sheets</span><span lang="tr">Yazdırılabilir sayfalar</span></span><h2><span lang="en">Material you can print tonight</span><span lang="tr">Bu akşam yazdırabileceğiniz materyal</span></h2></div>
     <p class="sec-lede reveal" lang="en">Open a folder to read it on the page; the print button prints only that sheet. Everything is written by me, for my own students.</p>
     <p class="sec-lede reveal" lang="tr">Sayfada okumak için bir başlığı açın; yazdır düğmesi yalnızca o sayfayı yazdırır. Her şeyi kendi öğrencilerim için ben yazdım.</p>
 
@@ -374,6 +392,61 @@ var l=localStorage.getItem('nm-lang');if(l==='tr'){document.documentElement.setA
   </div>
 </section>
 
+<!-- ============ COMPETITIONS ============ -->
+<section class="sec" id="competitions">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="num"><span lang="en">Opportunities</span><span lang="tr">Fırsatlar</span></span><h2><span lang="en">Competitions worth entering</span><span lang="tr">Katılmaya değer yarışmalar</span></h2></div>
+    <p class="sec-lede reveal" lang="en">As a school coordinator I receive calls for entries from universities, ministries and foundations throughout the year — far more than any one class can enter. The ones I have put students into are below. If you are a student or a teacher and want to be told when the next call opens, write and I will forward it.</p>
+    <p class="sec-lede reveal" lang="tr">Okul koordinatörü olarak yıl boyunca üniversitelerden, bakanlıklardan ve vakıflardan katılım çağrıları alıyorum — tek bir sınıfın katılabileceğinden çok daha fazlası. Öğrenci gönderdiklerim aşağıda. Öğrenci ya da öğretmenseniz ve bir sonraki çağrı açıldığında haber almak istiyorsanız yazın, ileteyim.</p>
+
+    <div class="story-grid">
+      <article class="story feature reveal">
+        <p class="story-year">2026</p>
+        <h3><span lang="en">Ivy League composition competitions</span><span lang="tr">Ivy League kompozisyon yarışmaları</span></h3>
+        <p lang="en">This year I entered students from Ankara High School of Science into composition competitions run by Ivy League universities in the United States — the first time the school has taken part.</p>
+        <p lang="tr">Bu yıl Ankara Fen Lisesi öğrencilerini Amerika Birleşik Devletleri'ndeki Ivy League üniversitelerinin düzenlediği kompozisyon yarışmalarına soktum — okulun bu yarışmalara ilk katılımı oldu.</p>
+      </article>
+      <article class="story reveal">
+        <p class="story-year"><span lang="en">Annual</span><span lang="tr">Her yıl</span></p>
+        <h3><span lang="en">BOW SEAT Ocean Awareness Contest</span><span lang="tr">BOW SEAT Okyanus Farkındalığı Yarışması</span></h3>
+        <p lang="en">An international writing and art contest on ocean and climate themes. I coordinate the school's entries; the 16th edition was the most recent.</p>
+        <p lang="tr">Okyanus ve iklim temalı uluslararası yazı ve sanat yarışması. Okulun katılımını koordine ediyorum; en sonuncusu 16.'sıydı.</p>
+      </article>
+      <article class="story reveal">
+        <p class="story-year"><span lang="en">Annual</span><span lang="tr">Her yıl</span></p>
+        <h3><span lang="en">SARC, University of Nevada</span><span lang="tr">SARC, Nevada Üniversitesi</span></h3>
+        <p lang="en">An international English composition competition open to secondary and high school students worldwide.</p>
+        <p lang="tr">Dünya genelinde ortaokul ve lise öğrencilerine açık uluslararası İngilizce kompozisyon yarışması.</p>
+      </article>
+      <article class="story reveal">
+        <p class="story-year"><span lang="en">Annual</span><span lang="tr">Her yıl</span></p>
+        <h3><span lang="en">Çankaya University Creative Writing</span><span lang="tr">Çankaya Üniversitesi Yaratıcı Yazarlık</span></h3>
+        <p lang="en">Run by the Department of English Language and Literature on a set theme each year. All eight of my entrants reached the finals of the 12th competition.</p>
+        <p lang="tr">İngiliz Dili ve Edebiyatı Bölümü tarafından her yıl belirli bir tema üzerine düzenlenir. 12.'sinde sekiz öğrencimin tamamı finale kaldı.</p>
+      </article>
+      <article class="story reveal">
+        <p class="story-year"><span lang="en">Annual</span><span lang="tr">Her yıl</span></p>
+        <h3><span lang="en">GELOSEA International English Olympiad</span><span lang="tr">GELOSEA Uluslararası İngilizce Olimpiyatı</span></h3>
+        <p lang="en">A ninth-grade student of mine ranked first in Türkiye. Entries go through a school coordinator.</p>
+        <p lang="tr">Dokuzuncu sınıf öğrencim Türkiye birincisi oldu. Katılım okul koordinatörü aracılığıyla yapılır.</p>
+      </article>
+      <article class="story reveal">
+        <p class="story-year"><span lang="en">Annual</span><span lang="tr">Her yıl</span></p>
+        <h3><span lang="en">Ministry of Environment — “Life Begins with Water”</span><span lang="tr">Çevre Bakanlığı — “Hayat Suyla Başlar”</span></h3>
+        <p lang="en">A national high school composition competition. I coordinate the school's entries.</p>
+        <p lang="tr">Ulusal lise kompozisyon yarışması. Okulun katılımını koordine ediyorum.</p>
+      </article>
+    </div>
+
+    <div class="card accent reveal mt">
+      <h3 class="card-title"><span lang="en">Want the next call?</span><span lang="tr">Bir sonraki çağrıyı ister misiniz?</span></h3>
+      <p lang="en">Write with your school and year group. When a call opens that suits you, I forward it with the deadline and the entry requirements — there is no list to join and no address is stored anywhere.</p>
+      <p lang="tr">Okulunuzu ve sınıfınızı yazın. Size uygun bir çağrı açıldığında son tarih ve katılım koşullarıyla iletirim — katılınacak bir liste yok ve hiçbir adres hiçbir yerde saklanmaz.</p>
+      <p><a class="btn btn-primary" href="contact.html"><span lang="en">Ask to be forwarded calls</span><span lang="tr">Çağrıların iletilmesini isteyin</span></a></p>
+    </div>
+  </div>
+</section>
+
 <section class="sec alt cta-band">
   <div class="wrap center">
     <h2 class="reveal"><span lang="en">Something you would like added here?</span><span lang="tr">Buraya eklenmesini istediğiniz bir şey var mı?</span></h2>
@@ -419,6 +492,7 @@ var l=localStorage.getItem('nm-lang');if(l==='tr'){document.documentElement.setA
 </button>
 
 <script src="assets/main.js"></script>
+<script src="assets/library.js"></script>
 <script src="assets/tools.js"></script>
 </body>
 </html>

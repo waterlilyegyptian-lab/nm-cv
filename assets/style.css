@@ -735,3 +735,49 @@ html[data-lang="tr"] body [lang="en"]{display:none}
 .spec:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg)}
 .spec h3{font-size:18px; margin-bottom:8px; color:var(--accent)}
 .spec p{font-size:14.5px; color:var(--ink-soft); margin:0}
+
+/* ---------- resource library ---------- */
+.how-filed{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:28px 32px; box-shadow:var(--shadow); margin-bottom:24px}
+.how-filed h3{font-size:20px; margin-bottom:10px}
+.how-filed > p{font-size:15.5px; color:var(--ink-soft); max-width:70ch}
+.filed-key{margin:18px 0 0; display:grid; gap:2px}
+.filed-key > div{display:grid; grid-template-columns:120px 1fr; gap:22px; padding:13px 0; border-bottom:1px solid var(--line-soft)}
+.filed-key > div:last-child{border-bottom:0; padding-bottom:0}
+.filed-key dt{font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); padding-top:3px}
+.filed-key dd{margin:0; font-size:15px; color:var(--ink-soft); line-height:1.6}
+
+.tool.lib{padding:24px 26px}
+.lib-bar{display:grid; gap:14px; padding-bottom:18px; border-bottom:1px solid var(--line-soft)}
+.lib-facet{display:grid; grid-template-columns:78px 1fr; gap:16px; align-items:start}
+.lib-facet-name{font-size:11px; font-weight:600; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-mute); padding-top:9px}
+.lib-chips{display:flex; flex-wrap:wrap; gap:7px}
+.chip-btn{font:inherit; font-size:13.5px; padding:6px 13px; border-radius:999px; cursor:pointer;
+  border:1px solid var(--line); background:var(--bg); color:var(--ink-soft); transition:.18s}
+.chip-btn:hover{border-color:var(--accent); color:var(--accent)}
+.chip-btn.on{background:var(--accent); border-color:var(--accent); color:var(--on-accent)}
+.lib-clear{justify-self:start; font:inherit; font-size:13px; background:none; border:0; padding:0;
+  color:var(--accent); cursor:pointer; text-decoration:underline; text-underline-offset:3px}
+.lib-count{font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-mute); margin:16px 0 14px}
+.lib-count strong{color:var(--accent); font-variant-numeric:tabular-nums}
+.lib-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(268px,1fr)); gap:14px}
+.lib-card{position:relative; display:flex; flex-direction:column; gap:7px; padding:20px 22px 40px;
+  background:var(--bg); border:1px solid var(--line); border-radius:14px; transition:.22s}
+.lib-card:hover{border-color:var(--accent); transform:translateY(-3px); box-shadow:var(--shadow)}
+.lib-format{font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--accent)}
+.lib-title{font-family:var(--serif); font-size:17.5px; font-weight:600; line-height:1.25; letter-spacing:-.015em}
+.lib-note{font-size:14px; color:var(--ink-soft); line-height:1.5}
+.lib-tags{display:flex; flex-wrap:wrap; gap:5px; margin-top:2px}
+.lib-tags em{font-style:normal; font-size:11px; color:var(--ink-mute); border:1px solid var(--line);
+  border-radius:99px; padding:2px 8px}
+.lib-go{position:absolute; right:18px; bottom:14px; font-size:15px; color:var(--accent); transition:.22s}
+.lib-card:hover .lib-go{transform:translate(3px,-3px)}
+.lib-empty{grid-column:1/-1; font-size:15px; color:var(--ink-mute); padding:24px 0; margin:0}
+
+@media (max-width:760px){
+  .filed-key > div{grid-template-columns:1fr; gap:5px}
+  .lib-facet{grid-template-columns:1fr; gap:6px}
+  .lib-facet-name{padding-top:0}
+  .how-filed{padding:22px 20px}
+}
+@media print{ .lib-bar,.lib-count{display:none} }

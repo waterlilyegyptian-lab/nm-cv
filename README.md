@@ -65,12 +65,70 @@ a student or parent has actually written and agreed to publish.
 
 ## Tools
 
-`assets/tools.js` holds three things, all running entirely in the visitor's
+`assets/tools.js` holds four things, all running entirely in the visitor's
 browser with no network requests:
 
 - **Level check** — twelve graded questions placing the visitor between A2 and C1
-- **Study planner** — weeks and hours needed to move between exam scores
+- **Study planner** — weeks and hours needed to move between scores, across 28 examinations
+- **Resource library** — a filterable index built from `assets/library.js`
 - **Contact form** — composes a message and opens the visitor's own mail application
+
+### Adding an examination to the planner
+
+Every exam is one line in the `EXAMS` table in `assets/tools.js`:
+
+```js
+gre: ex('GRE Verbal Reasoning', 'grad',
+        ['145','150','155','160','165','170'],   // the score scale, low to high
+        100,                                      // study hours to move one step
+        'gradVerbal',                             // which FOCUS profile to show
+        'scaled score', 'ölçekli puan',           // the unit, English then Turkish
+        'GRE Sözel Muhakeme'),                    // optional Turkish name
+```
+
+`group` is one of `grad`, `ug`, `prof`, `camb`, `tr`, `spec`, `school` — it decides
+which heading the exam appears under in the dropdown. The `FOCUS` object above the
+table holds the study-split advice, shared across exams of the same family; add a
+new profile there only when an exam genuinely needs different advice.
+
+### The resource library
+
+`assets/library.js` is the whole library — one array, one object per resource, with
+a worked example and the field list in a comment at the top of the file. The filter
+chips are generated from the data, so a new format, skill or level starts appearing
+as a filter as soon as one resource uses it.
+
+Each entry carries three labels, and this is the part worth getting right:
+
+| Label | What it answers | Values |
+|---|---|---|
+| `format` | What is it physically? | `sheet` `pdf` `podcast` `video` `film` `site` `test` `book` |
+| `skills` | What does it actually train? | `listening` `speaking` `reading` `writing` `vocabulary` `grammar` `technique` |
+| `levels` | Who is it genuinely right for? | `A2` `B1` `B2` `C1` `C2` |
+| `exams` | Optional — is it for one paper? | free text: `TOEFL`, `GRE`, `YDS`, … |
+
+Rules that keep the library usable as it grows:
+
+1. **File by use, not by source.** Where a resource came from does not help a
+   student choose; what they can do with it does.
+2. **Two skills, rarely three.** A resource tagged with all seven trains none of
+   them well, and it defeats the filter.
+3. **Be honest about level.** Material two levels above a student is not ambitious,
+   it is wasted time — and mis-levelled entries are what make a library stop
+   being trusted.
+4. **One sentence per note.** Say what it is and who it helps. If it needs a
+   paragraph, it probably needs to be a printable sheet instead.
+5. **`href` can be an anchor.** `'#r-cue'` points at a printable sheet further down
+   the same page; anything starting `http` opens in a new tab and gets an ↗ marker.
+
+To turn a PDF into a library entry, put the file in `assets/files/`, set
+`format: 'pdf'` and `href: 'assets/files/name.pdf'`.
+
+### Competitions and calls for entry
+
+The “Opportunities” section on the resources page (`_src/pages/resources.html`,
+`id="competitions"`) is the standing list. Each competition is one `<article class="story">`
+block; copy an existing one when a new call arrives.
 
 ## Local preview
 

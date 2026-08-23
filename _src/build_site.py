@@ -149,7 +149,11 @@ def build():
             print('  ! missing', src)
             continue
         content = io.open(src, encoding='utf-8').read()
-        extra = '<script src="assets/tools.js"></script>\n' if 'data-tool' in content else ''
+        extra = ''
+        if 'data-tool="library"' in content:
+            extra += '<script src="assets/library.js"></script>\n'
+        if 'data-tool' in content:
+            extra += '<script src="assets/tools.js"></script>\n'
         html = SHELL.format(
             title_en=title_en, description=DESCRIPTIONS.get(f, ''), file=f,
             favicon=FAVICON, navlinks=nav_html(f), footlinks=foot_html(),
