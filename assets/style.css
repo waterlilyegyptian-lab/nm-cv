@@ -781,3 +781,6 @@ html[data-lang="tr"] body [lang="en"]{display:none}
   .how-filed{padding:22px 20px}
 }
 @media print{ .lib-bar,.lib-count{display:none} }
+
+/* a square source photograph gets a square frame, so nothing is cropped away */
+.ph-square{aspect-ratio:1/1}

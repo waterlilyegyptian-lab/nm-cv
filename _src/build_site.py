@@ -48,6 +48,8 @@ SHELL = '''<!DOCTYPE html>
 <meta property="og:title" content="{title_en} — Nilüfer Mısırlı">
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://waterlilyegyptian-lab.github.io/nm-cv/assets/img/portrait.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://waterlilyegyptian-lab.github.io/nm-cv/{file}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
