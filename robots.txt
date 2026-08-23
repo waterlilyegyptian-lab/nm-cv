@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://waterlilyegyptian-lab.github.io/nm-cv/sitemap.xml

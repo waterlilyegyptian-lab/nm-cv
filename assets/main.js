@@ -25,6 +25,22 @@
     try { localStorage.setItem('nm-theme', next); } catch (e) {}
   });
 
+  /* ---------- language ----------
+     The stylesheet shows [lang="en"] or [lang="tr"] blocks from the root
+     data-lang attribute, so switching is one attribute write. English is the
+     unstamped default, which is also what a search engine and a no-JS
+     visitor see. */
+  var langBtn = document.getElementById('lang-toggle');
+  if (langBtn) {
+    langBtn.addEventListener('click', function () {
+      var next = root.getAttribute('data-lang') === 'tr' ? 'en' : 'tr';
+      if (next === 'tr') { root.setAttribute('data-lang', 'tr'); root.lang = 'tr'; }
+      else { root.removeAttribute('data-lang'); root.lang = 'en'; }
+      try { localStorage.setItem('nm-lang', next); } catch (e) {}
+      document.dispatchEvent(new CustomEvent('nm:langchange', { detail: next }));
+    });
+  }
+
   /* ---------- mobile menu ---------- */
   var menuBtn = document.getElementById('menu-btn');
   var links = document.querySelector('.nav-links');
