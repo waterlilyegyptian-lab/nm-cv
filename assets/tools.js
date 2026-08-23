@@ -156,6 +156,32 @@
                 'Bölüm ölçütüne göre deneme yazma — %30.',
                 'Özetleme ve başka sözcüklerle anlatma görevleri — %25.',
                 'Ders uzunluğunda dinleme — %15.']
+    },
+    gre: {
+      label: 'GRE Verbal Reasoning',
+      steps: ['145', '150', '155', '160', '165', '170'],
+      hoursPerStep: 100,
+      focusEn: ['Vocabulary in families and in context — 40%. Text completion and sentence equivalence are won here.',
+                'Reading comprehension on dense argumentative passages — 30%.',
+                'Analytical writing, one task drafted and rewritten each week — 20%.',
+                'Timed full sections with an error log by question type — 10%.'],
+      focusTr: ['Aileler hâlinde ve bağlam içinde kelime — %40. Text completion ve sentence equivalence burada kazanılır.',
+                'Yoğun tartışma metinlerinde okuduğunu anlama — %30.',
+                'Analitik yazma; her hafta bir görev yazılıp yeniden yazılır — %20.',
+                'Soru tipine göre hata kaydıyla süreli tam bölümler — %10.']
+    },
+    sat: {
+      label: 'SAT Reading & Writing',
+      steps: ['400', '440', '480', '520', '560', '600', '640', '680', '720', '760'],
+      hoursPerStep: 30,
+      focusEn: ['Evidence-based reading with the answer located in the text every time — 35%.',
+                'Grammar and rhetoric of the writing module — 30%.',
+                'Vocabulary in context, including the historical documents — 20%.',
+                'Timed sections from the first week; pacing is the skill being tested — 15%.'],
+      focusTr: ['Cevabın her seferinde metinde bulunduğu kanıta dayalı okuma — %35.',
+                'Yazma modülünün dil bilgisi ve retoriği — %30.',
+                'Tarihî belgeler dahil, bağlam içinde kelime — %20.',
+                'İlk haftadan süreli bölümler; ölçülen beceri tempodur — %15.']
     }
   };
 

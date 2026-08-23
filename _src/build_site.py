@@ -11,9 +11,9 @@ SITE = os.path.dirname(HERE)          # generated pages sit at the repository ro
 PAGE_DIR = os.path.join(HERE, 'pages')  # sources live beside this script
 PAGES = [
     # file            EN nav label      TR nav label      EN title                                    TR title
-    ('index.html',    'Home',           'Ana Sayfa',      'English lessons that hold up under exams', 'Sınavda işe yarayan İngilizce dersleri'),
+    ('index.html',    'Home',           'Ana Sayfa',      'Preparation for thirty-five examinations', 'Otuz beş sınav için hazırlık'),
     ('about.html',    'About',          'Hakkımda',       'About Nilüfer Mısırlı',                    'Hakkımda'),
-    ('teaching.html', 'Teaching',       'Dersler',        'Courses and how they run',                 'Dersler ve nasıl işlendiği'),
+    ('teaching.html', 'Teaching',       'Dersler',        'Every examination, and how each course runs','Her sınav ve dersin nasıl işlediği'),
     ('results.html',  'Results',        'Başarılar',      'What students have gone on to do',         'Öğrencilerin ulaştığı sonuçlar'),
     ('resources.html','Resources',      'Kaynaklar',      'Free resources and study tools',           'Ücretsiz kaynaklar ve çalışma araçları'),
     ('fees.html',     'Fees & Schedule','Ücret & Program','Fees, schedule and how to start',          'Ücretler, program ve başlangıç'),
@@ -22,10 +22,10 @@ PAGES = [
     ('contact.html',  'Contact',        'İletişim',       'Get in touch',                             'İletişim'),
 ]
 DESCRIPTIONS = {
- 'index.html': 'Nilüfer Mısırlı — English teacher (M.A. TESL, Cambridge ESOL examiner) in Ankara. IELTS, TOEFL iBT, METU and Bilkent proficiency, SAT and school English, online and in person.',
+ 'index.html': 'Nilüfer Mısırlı — English teacher (M.A. TESL) in Ankara, Cambridge-certified speaking examiner across 14 levels. TOEFL iBT, GRE, GMAT, SAT, LSAT, MCAT, IELTS, METU and Bilkent proficiency, YDS and school English — online and in person.',
  'about.html': 'Twenty-nine years of English teaching across Türkiye, the United States, the United Kingdom and China — and the teaching philosophy behind it.',
- 'teaching.html': 'Clear descriptions of every course: who it is for, how a lesson runs, what you practise each week and how progress is measured.',
- 'results.html': 'Documented student outcomes — Oxford and Columbia admissions, a national English olympiad winner, published student writing and award-winning European school projects.',
+ 'teaching.html': 'Thirty-five examinations — GRE, GMAT, LSAT, MCAT, TOEFL iBT, SAT, ACT, AP, PTE, Cambridge, IELTS, YDS, YÖKDİL and more — each with who it is for, how a lesson runs, what you practise weekly and how progress is measured.',
+ 'results.html': 'Documented student outcomes — TOEFL passes from Galatasaray, Robert College, SEV and Saint Joseph, Oxford and Columbia admissions, a national English olympiad winner and award-winning European school projects.',
  'resources.html': 'Free study material for English learners — IELTS speaking cue cards, academic vocabulary, a corrections sheet for Turkish speakers — plus a level check and a study planner.',
  'fees.html': 'How lessons are priced, what is included, the weekly timetable and how to book a free introductory meeting.',
  'faq.html': 'Answers to the questions students and parents ask most often about lessons, exams, materials, scheduling and payment.',
