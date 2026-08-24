@@ -18,7 +18,7 @@ PAGES = [
     ('resources.html','Resources',      'Kaynaklar',      'Free resources and study tools',           'Ücretsiz kaynaklar ve çalışma araçları'),
     ('fees.html',     'Fees & Schedule','Ücret & Program','Fees, schedule and how to start',          'Ücretler, program ve başlangıç'),
     ('faq.html',      'FAQ',            'SSS',            'Frequently asked questions',               'Sıkça sorulan sorular'),
-    ('cv.html',       'CV',             'Özgeçmiş',       'Curriculum vitae',                         'Özgeçmiş'),
+    ('cv.html',       'CV',             'Özgeçmiş',       'Curriculum vitae — coming soon',           'Özgeçmiş — yakında'),
     ('contact.html',  'Contact',        'İletişim',       'Get in touch',                             'İletişim'),
 ]
 DESCRIPTIONS = {
@@ -29,7 +29,7 @@ DESCRIPTIONS = {
  'resources.html': 'Free study material for English learners — IELTS speaking cue cards, academic vocabulary, a corrections sheet for Turkish speakers — plus a level check and a study planner.',
  'fees.html': 'How lessons are priced, what is included, the weekly timetable and how to book a free introductory meeting.',
  'faq.html': 'Answers to the questions students and parents ask most often about lessons, exams, materials, scheduling and payment.',
- 'cv.html': 'Full curriculum vitae of Nilüfer Mısırlı — education, teaching record, Erasmus+ and eTwinning projects, research, credentials and honours.',
+ 'cv.html': 'The full curriculum vitae is being revised and will be published here shortly. Available on request in the meantime.',
  'contact.html': 'Email, tutoring platforms and social channels — and a form for requesting a quote or a free introductory meeting.',
 }
 

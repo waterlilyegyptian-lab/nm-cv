@@ -18,8 +18,33 @@ no tracking, no cookies.
 | `resources.html` | Free printable study material, plus the level check and the exam study planner |
 | `fees.html` | What changes the price, what is included, what is never charged, the weekly timetable, how to start |
 | `faq.html` | Twenty questions students and parents actually ask |
-| `cv.html` | The full curriculum vitae (English only) |
+| `cv.html` | Holding page — “Will be added soon”. See *Restoring the CV page* below |
 | `contact.html` | Email, tutoring platforms, social channels and an enquiry form |
+
+## The CV page is currently held back
+
+`cv.html` shows a “Will be added soon” holding page. The full curriculum vitae
+and the downloadable `.docx` were removed from this repository on 24 August 2026
+and moved to `_held/` **one level above the repository**, which is not published:
+
+    nilufer-site/
+      _held/cv-full.html                  ← the CV page body
+      _held/Nilufer-Misirli-CV-2026.docx  ← the document the page offered
+      site/                               ← this repository
+
+To put it back:
+
+```bash
+mv ../_held/cv-full.html _src/pages/cv.html
+mv ../_held/Nilufer-Misirli-CV-2026.docx assets/
+python3 _src/build_site.py
+```
+
+Then restore the page title and description for `cv.html` in `_src/build_site.py`.
+
+Note that earlier commits still contain both files, so the content is reachable
+by anyone who reads this repository's history — it is hidden from the website,
+not erased. Rewriting history would be needed to remove it completely.
 
 ## Editing
 

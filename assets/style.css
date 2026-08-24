@@ -784,3 +784,8 @@ html[data-lang="tr"] body [lang="en"]{display:none}
 
 /* a square source photograph gets a square frame, so nothing is cropped away */
 .ph-square{aspect-ratio:1/1}
+
+/* a page that is deliberately holding: give the headline room to stand alone */
+.page-hero.holding{padding-bottom:72px; border-bottom:0}
+.page-hero.holding h1{font-size:clamp(40px,7vw,72px)}
+.page-hero.holding .btn{margin:6px 8px 0 0}
