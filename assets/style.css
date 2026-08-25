@@ -789,3 +789,147 @@ html[data-lang="tr"] body [lang="en"]{display:none}
 .page-hero.holding{padding-bottom:72px; border-bottom:0}
 .page-hero.holding h1{font-size:clamp(40px,7vw,72px)}
 .page-hero.holding .btn{margin:6px 8px 0 0}
+
+/* ============================================================
+   Typography refresh — a Caslon display over a Garamond text face.
+   Libre Caslon Display carries the large moments; EB Garamond does
+   the reading-size headings, where Caslon's contrast would thin out.
+   Both are old-style faces from the same lineage, so they agree.
+   ============================================================ */
+:root{
+  --display: "Libre Caslon Display", "Big Caslon", "Hoefler Text", Georgia, serif;
+  --serif:   "EB Garamond", "Iowan Old Style", Georgia, "Times New Roman", serif;
+}
+
+/* Garamond sets small for its point size — give it back the height it needs */
+h1,h2,h3,h4{font-family:var(--serif); letter-spacing:-.012em}
+
+.hero h1,.page-hero h1,.sec-head h2,.cta-band h2,.split-text h2,.promo h2{
+  font-family:var(--display); font-weight:400; letter-spacing:-.018em}
+.hero h1{font-size:clamp(56px,10.5vw,116px); line-height:.98}
+.page-hero h1{font-size:clamp(40px,6.6vw,70px); line-height:1.04}
+.page-hero.holding h1{font-size:clamp(44px,7.4vw,78px)}
+.sec-head h2{font-size:clamp(33px,4.7vw,48px); line-height:1.08}
+.cta-band h2{font-size:clamp(29px,4.3vw,44px)}
+.split-text h2,.promo h2{line-height:1.1}
+.split-text h2{font-size:clamp(29px,3.9vw,42px)}
+.promo h2{font-size:29px}
+
+/* reading-size headings keep Garamond, one notch larger than before */
+.edu h3,.job h4,.course h3,.story h3,.route h3,.res-title,.lib-title,.spec h3,
+.factor h3,.pack h3,.prose h3,.how-filed h3,.exam-list,.foot-name,.tool-q{
+  font-weight:600}
+.course h3{font-size:26px}
+.story h3{font-size:21.5px}
+.route h3{font-size:23.5px}
+.spec h3,.factor h3{font-size:19.5px}
+.res-title{font-size:20.5px}
+.lib-title{font-size:19px; line-height:1.22}
+.prose h3{font-size:23px}
+.how-filed h3{font-size:21.5px}
+.exam-list{font-size:17.5px}
+.tool-q{font-size:24px}
+.sub{font-size:21.5px}
+.edu h3{font-size:23.5px}
+.job h4{font-size:22.5px}
+
+/* display numerals read better in Caslon */
+.stats dd,.strip-grid strong,.plan-big strong,.tool-level,.gpa strong,.pack-price{
+  font-family:var(--display); font-weight:400}
+.stats dd{font-size:clamp(33px,4.7vw,48px)}
+.strip-grid strong{font-size:33px}
+.plan-big strong{font-size:41px}
+.tool-level{font-size:44px}
+
+/* the italic is a real old-style italic now, so let it be seen */
+.hero h1 .ink{font-style:italic; font-weight:400}
+.eyebrow,.card-title,.mini,.foot-h,.plan-sub,.lib-format,.res-kicker,.exam-group h3{
+  font-feature-settings:"ss01"}
+
+/* ============================================================
+   Examination badges
+
+   These are typographic marks I drew for this site, not the boards'
+   own logos — republishing ETS, Cambridge or Pearson trademarks on a
+   tuition site is not something to do without their written say-so.
+   Each family gets one muted hue so a long page can be scanned.
+   ============================================================ */
+.badge-exam{
+  --bx: var(--accent);
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--serif); font-size:15px; font-weight:600; letter-spacing:.005em;
+  color:var(--ink); background:var(--surface);
+  border:1px solid color-mix(in srgb, var(--bx) 30%, var(--line));
+  border-radius:10px; padding:6px 12px 6px 6px; transition:.2s}
+.badge-exam::before{
+  content:attr(data-short);
+  display:grid; place-items:center; min-width:34px; height:26px; padding:0 6px;
+  font-family:var(--sans); font-size:10.5px; font-weight:700; letter-spacing:.06em;
+  color:#fff; background:var(--bx); border-radius:6px}
+:root[data-theme="dark"] .badge-exam::before{color:#06110f}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .badge-exam::before{color:#06110f}
+}
+.badge-exam:hover{border-color:var(--bx); transform:translateY(-1px)}
+
+.fam-grad   { --bx:#4a5fb8 }
+.fam-ug     { --bx:#b07023 }
+.fam-prof   { --bx:#0f766e }
+.fam-camb   { --bx:#9a3f52 }
+.fam-tr     { --bx:#3f7d43 }
+.fam-spec   { --bx:#4d6b86 }
+.fam-school { --bx:#7a5aa6 }
+:root[data-theme="dark"] .fam-grad{--bx:#8b9ce8} :root[data-theme="dark"] .fam-ug{--bx:#e0a765}
+:root[data-theme="dark"] .fam-prof{--bx:#5cc9b8} :root[data-theme="dark"] .fam-camb{--bx:#e08195}
+:root[data-theme="dark"] .fam-tr{--bx:#79c47f}   :root[data-theme="dark"] .fam-spec{--bx:#8fb0cd}
+:root[data-theme="dark"] .fam-school{--bx:#b596dd}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .fam-grad{--bx:#8b9ce8}
+  :root:not([data-theme="light"]) .fam-ug{--bx:#e0a765}
+  :root:not([data-theme="light"]) .fam-prof{--bx:#5cc9b8}
+  :root:not([data-theme="light"]) .fam-camb{--bx:#e08195}
+  :root:not([data-theme="light"]) .fam-tr{--bx:#79c47f}
+  :root:not([data-theme="light"]) .fam-spec{--bx:#8fb0cd}
+  :root:not([data-theme="light"]) .fam-school{--bx:#b596dd}
+}
+
+.badge-row{display:flex; flex-wrap:wrap; gap:8px; margin:0}
+.exam-group h3{color:var(--bx, var(--accent))}
+
+/* a single badge sitting on a course heading */
+.course h3 .badge-exam{margin-right:12px; transform:translateY(-2px)}
+
+@media (max-width:520px){
+  .badge-exam{font-size:14px; padding:5px 10px 5px 5px}
+  .badge-exam::before{min-width:30px; height:23px; font-size:10px}
+}
+
+/* a badge with no label is just the mark — used on course headings */
+.badge-exam:empty{padding:0; border:0; background:none; vertical-align:middle}
+.badge-exam:empty::before{min-width:44px; height:28px; font-size:11px}
+
+/* ============================================================
+   The slogan — a drawn underline that arrives after the words
+   ============================================================ */
+.hero h1 .ink{position:relative; display:inline-block; padding-bottom:.06em}
+.swash{position:absolute; left:-2%; bottom:-.02em; width:104%; height:.3em; overflow:visible; pointer-events:none}
+.swash path{
+  fill:none; stroke:var(--accent-2); stroke-width:7; stroke-linecap:round; stroke-linejoin:round;
+  opacity:.85;
+  stroke-dasharray:var(--len,420); stroke-dashoffset:var(--len,420);
+  transition:stroke-dashoffset 1.15s cubic-bezier(.22,.65,.3,1) .45s}
+.reveal.in .swash path,.hero h1.in .swash path{stroke-dashoffset:0}
+@media (prefers-reduced-motion: reduce){
+  .swash path{transition:none; stroke-dashoffset:0}
+}
+@media print{ .swash{display:none} }
+
+/* ============================================================
+   Evidence — certificates and photographs on the results page
+   ============================================================ */
+.evidence-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:18px}
+.evidence-grid .ph{aspect-ratio:4/3}
+.evidence-grid .ph-empty::before{font-size:24px}
+.ph-zoom{cursor:zoom-in}
+.evidence-note{font-size:13.5px; color:var(--ink-mute); margin-top:16px; max-width:70ch}
+.nowrap{white-space:nowrap}

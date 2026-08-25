@@ -136,6 +136,19 @@
     counters.forEach(function (el) { co.observe(el); });
   }
 
+  /* ---------- a loaded photograph opens full size ----------
+     Only frames whose image actually arrived become clickable, so a
+     missing file never turns into a broken link. */
+  document.querySelectorAll('.ph img').forEach(function (img) {
+    function arm() {
+      var fig = img.closest('.ph');
+      if (!fig || !img.naturalWidth) return;
+      fig.classList.add('ph-zoom');
+      fig.addEventListener('click', function () { window.open(img.src, '_blank', 'noopener'); });
+    }
+    if (img.complete) arm(); else img.addEventListener('load', arm);
+  });
+
   /* ---------- footer year ---------- */
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
