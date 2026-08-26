@@ -909,22 +909,6 @@ h1,h2,h3,h4{font-family:var(--serif); letter-spacing:-.012em}
 .badge-exam:empty::before{min-width:44px; height:28px; font-size:11px}
 
 /* ============================================================
-   The slogan — a drawn underline that arrives after the words
-   ============================================================ */
-.hero h1 .ink{position:relative; display:inline-block; padding-bottom:.06em}
-.swash{position:absolute; left:-2%; bottom:-.02em; width:104%; height:.3em; overflow:visible; pointer-events:none}
-.swash path{
-  fill:none; stroke:var(--accent-2); stroke-width:7; stroke-linecap:round; stroke-linejoin:round;
-  opacity:.85;
-  stroke-dasharray:var(--len,420); stroke-dashoffset:var(--len,420);
-  transition:stroke-dashoffset 1.15s cubic-bezier(.22,.65,.3,1) .45s}
-.reveal.in .swash path,.hero h1.in .swash path{stroke-dashoffset:0}
-@media (prefers-reduced-motion: reduce){
-  .swash path{transition:none; stroke-dashoffset:0}
-}
-@media print{ .swash{display:none} }
-
-/* ============================================================
    Evidence — certificates and photographs on the results page
    ============================================================ */
 .evidence-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:18px}
@@ -932,4 +916,3 @@ h1,h2,h3,h4{font-family:var(--serif); letter-spacing:-.012em}
 .evidence-grid .ph-empty::before{font-size:24px}
 .ph-zoom{cursor:zoom-in}
 .evidence-note{font-size:13.5px; color:var(--ink-mute); margin-top:16px; max-width:70ch}
-.nowrap{white-space:nowrap}
