@@ -21,6 +21,44 @@ no tracking, no cookies.
 | `cv.html` | Holding page — “Will be added soon”. See *Restoring the CV page* below |
 | `contact.html` | Email, tutoring platforms, social channels and an enquiry form |
 
+## The WhatsApp popup
+
+A native `<dialog>` in the shared shell (`_src/build_site.py`), so focus
+trapping, Esc and the backdrop come from the browser rather than from
+hand-written JavaScript. The behaviour is in `assets/main.js`.
+
+It is deliberately quiet. It does not appear on the contact page, waits 4.5
+seconds, and skips the showing entirely if the page is still in a background
+tab — waiting for the visitor to actually arrive instead. Per visitor it shows
+at most three times, pauses for seven days after a dismissal, and never returns
+once the WhatsApp button has been used. State lives in one `nm-promo` key in
+`localStorage`, wrapped in try/catch so private browsing cannot break the page.
+
+### Regenerating the QR codes
+
+The codes are generated once and committed as static SVGs, so the site makes no
+third-party request — a QR fetched from someone else's API would quietly break
+the "no tracking" promise at the bottom of every page.
+
+```bash
+python3 -m pip install segno
+python3 _src/make_qr.py
+```
+
+That writes eight codes to `assets/img/qr/` (four topics x two languages) and
+`assets/wa-links.js`, which holds the same URLs for the popup's button. Both
+come from one table in `_src/make_qr.py`, so the code and the link can never
+drift apart. **Change the phone number or the wording there, not by hand.**
+
+Topics are the keys of `TOPICS` in that script. Adding one means adding a key,
+re-running the script, and adding a matching `<label>` to the popup markup in
+`_src/build_site.py`.
+
+Keep the messages short: a Turkish character costs six to nine characters once
+percent-encoded, and a longer URL makes a denser QR. The current wording fits
+in a version 6-7 symbol, which still scans from a phone screen at the 148px the
+popup displays it at.
+
 ## The CV page is currently held back
 
 `cv.html` shows a “Will be added soon” holding page. The full curriculum vitae

@@ -149,6 +149,89 @@
     if (img.complete) arm(); else img.addEventListener('load', arm);
   });
 
+  /* ---------- WhatsApp popup ----------
+     A native <dialog>, so the browser handles focus trapping and Esc.
+     It is deliberately quiet: not on the contact page, not more than
+     three times for one visitor, and never again once they have used it. */
+  (function () {
+    var dlg = document.getElementById('promo');
+    if (!dlg || !window.NM_WA) return;
+
+    var page = location.pathname.split('/').pop() || 'index.html';
+    if (page === 'contact.html') return;
+
+    var KEY = 'nm-promo';
+    function state() {
+      try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { return {}; }
+    }
+    function save(patch) {
+      var st = state();
+      for (var k in patch) st[k] = patch[k];
+      try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {}
+    }
+
+    var st = state();
+    var DAY = 86400000;
+    if (st.used) return;                                  // already got in touch
+    if ((st.shown || 0) >= 3) return;                     // asked enough
+    if (st.closed && Date.now() - st.closed < 7 * DAY) return;
+
+    var qr = dlg.querySelector('[data-role="qr"]');
+    var wa = dlg.querySelector('[data-role="wa"]');
+    var radios = dlg.querySelectorAll('input[name="promo-topic"]');
+
+    function topic() {
+      for (var i = 0; i < radios.length; i++) if (radios[i].checked) return radios[i].value;
+      return 'toefl';
+    }
+    function lang() {
+      return root.getAttribute('data-lang') === 'tr' ? 'tr' : 'en';
+    }
+    function sync() {
+      var t = topic(), l = lang();
+      var links = window.NM_WA[t] || window.NM_WA.toefl;
+      wa.href = links[l] || links.en;
+      qr.src = 'assets/img/qr/' + t + '-' + l + '.svg';
+      qr.alt = l === 'tr'
+        ? 'WhatsApp sohbetini açan QR kod'
+        : 'QR code that opens a WhatsApp chat';
+    }
+
+    radios.forEach(function (r) { r.addEventListener('change', sync); });
+    document.addEventListener('nm:langchange', sync);
+    sync();
+
+    function close() {
+      save({ closed: Date.now() });
+      if (dlg.open) dlg.close();
+    }
+    dlg.querySelector('[data-role="close"]').addEventListener('click', close);
+    dlg.addEventListener('cancel', function () { save({ closed: Date.now() }); });
+
+    /* a click on the backdrop lands on the dialog itself, not on its contents */
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });
+
+    wa.addEventListener('click', function () { save({ used: true }); });
+
+    function open() {
+      save({ shown: (state().shown || 0) + 1 });
+      if (typeof dlg.showModal === 'function') dlg.showModal();
+      else dlg.setAttribute('open', '');
+    }
+
+    /* Opened in a background tab, the timer fires on a page nobody is looking
+       at. Wait for the visitor to actually arrive rather than spending the
+       showing on an empty room. */
+    window.setTimeout(function openWhenVisible() {
+      if (!document.hidden) { open(); return; }
+      document.addEventListener('visibilitychange', function once() {
+        if (document.hidden) return;
+        document.removeEventListener('visibilitychange', once);
+        open();
+      });
+    }, 4500);
+  })();
+
   /* ---------- footer year ---------- */
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();

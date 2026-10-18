@@ -916,3 +916,93 @@ h1,h2,h3,h4{font-family:var(--serif); letter-spacing:-.012em}
 .evidence-grid .ph-empty::before{font-size:24px}
 .ph-zoom{cursor:zoom-in}
 .evidence-note{font-size:13.5px; color:var(--ink-mute); margin-top:16px; max-width:70ch}
+
+/* ============================================================
+   WhatsApp popup
+
+   A native <dialog>, so focus trapping, Esc and the backdrop come
+   from the browser rather than from hand-written JavaScript.
+   ============================================================ */
+:root{ --wa:#0E7A6E; --wa-ink:#ffffff }
+:root[data-theme="dark"]{ --wa:#25D366; --wa-ink:#06110f }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --wa:#25D366; --wa-ink:#06110f }
+}
+
+dialog.promo{
+  width:min(560px, calc(100vw - 32px)); max-height:calc(100dvh - 32px);
+  padding:0; border:1px solid var(--line); border-radius:20px;
+  background:var(--surface); color:var(--ink);
+  box-shadow:var(--shadow-lg); overflow:auto; position:relative}
+dialog.promo:not([open]){display:none}
+dialog.promo::backdrop{background:rgba(9,18,17,.55); backdrop-filter:blur(3px)}
+
+dialog.promo > *{padding-left:34px; padding-right:34px}
+.promo-close{position:absolute; top:14px; right:14px; z-index:2;
+  display:grid; place-items:center; width:34px; height:34px; padding:0;
+  border:1px solid var(--line); border-radius:50%; background:var(--bg);
+  color:var(--ink-soft); cursor:pointer; transition:.2s}
+.promo-close:hover{color:var(--ink); border-color:var(--ink-mute); transform:rotate(90deg)}
+
+.promo-eyebrow{margin:30px 0 10px; font-size:11px; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent)}
+.promo-title{margin:0 0 10px; font-family:var(--display); font-weight:400;
+  font-size:clamp(28px,5vw,36px); line-height:1.08; letter-spacing:-.018em}
+.promo-lede{margin:0 0 22px; font-size:15px; line-height:1.55; color:var(--ink-soft)}
+
+.promo-body{display:grid; grid-template-columns:auto 1fr; gap:24px; align-items:start;
+  padding-top:22px; padding-bottom:20px; border-top:1px solid var(--line-soft)}
+
+/* the code always sits on white — a QR needs dark modules on a light ground
+   to scan, whatever theme the rest of the page is in */
+.promo-qr{margin:0; display:flex; flex-direction:column; align-items:center; gap:8px; flex:none}
+.promo-qr img{display:block; width:148px; height:148px; border-radius:10px;
+  background:#fff; border:1px solid var(--line); padding:6px}
+.promo-qr figcaption{font-size:11px; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--ink-mute); text-align:center; max-width:150px; line-height:1.35}
+
+.promo-pick{min-width:0}
+.promo-label{margin:0 0 9px; font-size:11px; font-weight:600; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-mute)}
+.promo-topics{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px}
+.promo-topics label{position:relative; cursor:pointer}
+.promo-topics input{position:absolute; opacity:0; width:0; height:0}
+.promo-topics label > span{display:inline-block; font-size:13.5px; padding:6px 13px; border-radius:999px;
+  border:1px solid var(--line); background:var(--bg); color:var(--ink-soft); transition:.18s}
+.promo-topics label > span > span{padding:0; border:0; background:none; border-radius:0}
+.promo-topics label:hover > span{border-color:var(--accent); color:var(--accent)}
+.promo-topics input:checked + span,
+.promo-topics input:checked ~ span{background:var(--accent); border-color:var(--accent); color:#fff}
+:root[data-theme="dark"] .promo-topics input:checked ~ span{color:#06110f}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .promo-topics input:checked ~ span{color:#06110f}
+}
+.promo-topics input:focus-visible ~ span{outline:2px solid var(--accent); outline-offset:2px}
+
+.btn-wa{display:inline-flex; align-items:center; justify-content:center; gap:9px; width:100%;
+  font-size:15.5px; font-weight:600; padding:13px 20px; border-radius:12px;
+  background:var(--wa); color:var(--wa-ink); transition:.2s}
+.btn-wa:hover{filter:brightness(1.07); transform:translateY(-1px)}
+.promo-or{margin:10px 0 0; font-size:13px; color:var(--ink-mute); text-align:center}
+.promo-or a{color:var(--accent); border-bottom:1px solid transparent}
+.promo-or a:hover{border-bottom-color:var(--accent)}
+
+.promo-fine{margin:0; padding-top:14px; padding-bottom:24px; font-size:12.5px;
+  color:var(--ink-mute); border-top:1px solid var(--line-soft); line-height:1.5}
+
+@media (max-width:520px){
+  dialog.promo > *{padding-left:22px; padding-right:22px}
+  .promo-body{grid-template-columns:1fr; justify-items:center; gap:18px}
+  .promo-pick{width:100%}
+  .promo-topics{justify-content:center}
+  .promo-eyebrow{margin-top:26px}
+}
+
+@media (prefers-reduced-motion: no-preference){
+  dialog.promo[open]{animation:promo-in .32s cubic-bezier(.2,.7,.3,1)}
+  dialog.promo[open]::backdrop{animation:promo-fade .32s ease}
+}
+@keyframes promo-in{from{opacity:0; transform:translateY(14px) scale(.985)}}
+@keyframes promo-fade{from{opacity:0}}
+
+@media print{ dialog.promo{display:none !important} }
